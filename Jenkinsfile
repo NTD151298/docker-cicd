@@ -1,5 +1,15 @@
 pipeline {
   agent any
+  stage('Install Docker') {
+    steps {
+      script{
+        sh 'curl -fsSL https://get.docker.com | sh'
+        sh 'usermod -aG docker jenkins'
+        docker run -d --name jenkins -v /var/run/docker.sock:/var/run/docker.sock -p 8080:8080 jenkins/jenkins:lts
+      }
+    }
+}
+
   stages {
     stage('From github') {
       steps {
