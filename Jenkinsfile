@@ -8,12 +8,14 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            steps {
-                // Xây dựng Docker image từ Dockerfile trong thư mục hiện tại
-                script {
-                    def dockerImage = docker.build('duongtn1512/random_game:pingpong2', '.')
-                }
+          steps {
+            script {
+              def dockerImage = docker.build('duongtn1512/random_game:pingpong2', '.')
+              dockerImage.inside('-v /var/run/docker.sock:/var/run/docker.sock') {
+                sh 'docker build -t duongtn1512/random_game:pingpong2 .'
+              }
             }
+          }
         }
     }
 }
