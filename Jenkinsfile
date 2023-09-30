@@ -4,7 +4,7 @@ pipeline {
     stage('From github') {
       steps {
         // Lấy mã nguồn từ GitHub
-        git branch: 'main', credentialsId: 'github, url: 'https://github.com/NTD151298/docker-cicd'
+        git branch: 'main', credentialsId: 'github', url: 'https://github.com/NTD151298/docker-cicd'
       }
     }
     stage('Build and push docker to docker hub') {
