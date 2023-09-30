@@ -13,6 +13,7 @@ pipeline {
         withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
           sh 'docker build -t duongtn1512/random_game:pingpong2 .'
           sh 'docker push -t duongtn1512/random_game:pingpong2 '
+          // Text blank
         } 
       }
     }
