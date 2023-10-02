@@ -5,31 +5,24 @@ pipeline {
   }
   stages {
     stage('Build') {
-      steps {
-        echo "Now we will start building docker image"
-        sh 'docker build -t duongtn1512/random_game:pingpong5 .'
-        echo "Our image are successly build with tag pingpong5"
+      steps {      
+        sh 'docker build -t duongtn1512/random_game:pingpong:latest .'       
       }
     }
     stage('Login') {
-      steps {
-        echo "Enterning our dockerhub user name and password"
+      steps {        
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        echo "Login success"
       }
     }
     stage('Push') {
       steps {
-        echo "We are pushing now"
-        sh 'docker push duongtn1512/random_game:pingpong5'
-        echo "Push to doker registry done"
+        sh 'docker push duongtn1512/random_game:pingpong:latest'
       }
     }
   }
   post {
     always {
       sh 'docker logout'
-      echo "Logout docker"
     }
   }
 }
