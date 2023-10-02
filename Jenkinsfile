@@ -7,7 +7,7 @@ pipeline {
     stage('Build') {
       steps {      
         echo "Building..."
-        sh 'docker build -t duongtn1512/random_game:pingpong_latest .'       
+        sh 'docker build -t duongtn1512/random_game:pingpong99 .'       
       }
     }
     stage('Login') {
@@ -18,8 +18,8 @@ pipeline {
     }
     stage('Push') {
       steps {
-        echo "sdf"
-        sh 'docker push duongtn1512/random_game:pingpong_latest'
+        echo "Docker newest image are getting push to dockerhub ..."
+        sh 'docker push duongtn1512/random_game:pingpong99'
       }
     }
   }
