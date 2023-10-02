@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {      
-        sh 'docker build -t duongtn1512/random_game:pingpong:latest .'       
+        sh 'docker build -t duongtn1512/random_game:pingpong_latest .'       
       }
     }
     stage('Login') {
@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh 'docker push duongtn1512/random_game:pingpong:latest'
+        sh 'docker push duongtn1512/random_game:pingpong_latest'
       }
     }
   }
