@@ -6,6 +6,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {      
+        echo "Building..."
         sh 'docker build -t duongtn1512/random_game:pingpong_latest .'       
       }
     }
