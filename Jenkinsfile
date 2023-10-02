@@ -18,6 +18,7 @@ pipeline {
     }
     stage('Push') {
       steps {
+        echo "sdf"
         sh 'docker push duongtn1512/random_game:pingpong_latest'
       }
     }
