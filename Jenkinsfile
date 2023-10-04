@@ -2,7 +2,7 @@ pipeline {
   agent any
     environment {
       DOCKERHUB_CREDENTIALS = credentials('dockerhub')
-      GIT_COMMIT_TAG = sh(script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
+      GIT_COMMIT_TAG = sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
       DOCKER_IMAGE_NAME = "duongtn1512/random_game"
       NEW_DOCKER_IMAGE_NAME = "duongtn1512/random_game:${GIT_COMMIT_TAG}"
   }
