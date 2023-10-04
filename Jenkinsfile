@@ -12,13 +12,13 @@ pipeline {
     }
     stage('Login') {
       steps {        
-        echo "Docker hub..."
+        echo "Login to Docker hub..."
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
     stage('Push') {
       steps {
-        echo "Docker newest image are getting push to dockerhub ..."
+        echo "Pusing newest image are getting push to dockerhub ..."
         sh 'docker push duongtn1512/random_game:pingpong99'
       }
     }
