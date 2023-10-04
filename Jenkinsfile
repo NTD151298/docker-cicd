@@ -10,7 +10,7 @@ pipeline {
     stage('Build') {
       steps {      
         echo "Building..."
-        sh 'docker build -t ${DOCKER_IMAGE_NAME}:{GIT_COMMIT_TAG} .'       
+        sh 'docker build -t ${DOCKER_IMAGE_NAME}:${GIT_COMMIT_TAG} .'       
       }
     }
     stage('Login') {
@@ -22,7 +22,7 @@ pipeline {
     stage('Push') {
       steps {
         echo "Pusing newest image are getting push to dockerhub ..."
-        sh 'docker push ${DOCKER_IMAGE_NAME}:{GIT_COMMIT_TAG} '
+        sh 'docker push ${DOCKER_IMAGE_NAME}:${GIT_COMMIT_TAG} '
       }
     }
   }
