@@ -2,12 +2,15 @@ pipeline {
   agent any
   environment {
     DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    GIT_COMMIT_TAG = sh(script: 'git describe --tags --abbrev=0', returnStdout: true).trim()
+    DOCKER_IMAGE_NAME = "duongtn1512/random_game"
+    NEW_DOCKER_IMAGE_NAME = "duongtn1512/random_game:${GIT_COMMIT_TAG}"
   }
   stages {
     stage('Build') {
       steps {      
         echo "Building..."
-        sh 'docker build -t duongtn1512/random_game:pingpong99 .'       
+        sh 'docker build -t ${DOCKER_IMAGE_NAME}:{GIT_COMMIT_TAG} .'       
       }
     }
     stage('Login') {
@@ -19,7 +22,7 @@ pipeline {
     stage('Push') {
       steps {
         echo "Pusing newest image are getting push to dockerhub ..."
-        sh 'docker push duongtn1512/random_game:pingpong99'
+        sh 'docker push ${DOCKER_IMAGE_NAME}:{GIT_COMMIT_TAG} '
       }
     }
   }
@@ -29,16 +32,3 @@ pipeline {
     }
   }
 }
-//pipeline {
-//  agent any
-//  stages {
-//        stage('Build and Push Docker Image') {
-//        steps {
-//            withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-//              sh 'docker build -t duongtn1512/random_game:pingpong3 .'
-//              sh 'docker push duongtn1512/random_game:pingpong3 '
-//        } 
-//        }
-//    }
-//  }
-//}
