@@ -26,8 +26,23 @@ pipeline {
       }
     }
   }
+// Stage deploy on going fixing ...
+//    stage('Deploy') {
+//      steps {
+//        echo "Deploying to Kubernetes..."
+//        withCredentials([file(credentialsId: 'kubernetes-config', variable: 'KUBE_CONFIG')]) {
+//          sh """
+//              echo "\$KUBE_CONFIG" > ~/.kube/config
+//              kubectl apply -f kubernetes-deployment.yaml
+//          """
+//        }
+//      }
+//    }
   post {
     always {
+      echo "Destroy the remain un used docker image..."
+      sh 'docker image prune -f'
+      echo "Logout docker..."
       sh 'docker logout'
     }
   }
