@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {      
-        echo "Building..."
+        echo "Building newest image..."
         sh "docker build -t ${DOCKER_IMAGE_NAME}:${GIT_COMMIT_TAG} ."       
       }
     }
