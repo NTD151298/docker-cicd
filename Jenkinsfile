@@ -39,11 +39,20 @@ pipeline {
 //      }
 //    }
   post {
-    always {
-      echo "Destroy the remain un used docker image..."
-      sh "docker image prune -f"
-      echo "Logout docker..."
-      sh "docker logout"
-    }
+      always {
+          script {
+              node {
+                  try {
+                      echo "Destroying unused Docker images..."
+                      sh 'docker image prune -f || true'
+                      echo "Logging out from Docker Hub..."
+                      sh 'docker logout || true'
+                  } catch (Exception e) {
+                      echo "Post-cleanup actions failed: ${e.message}"
+                  }
+              }
+          }
+      }
   }
+
 }
