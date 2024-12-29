@@ -45,22 +45,22 @@ pipeline {
 //        }
 //      }
 //    }
-  post {
-    always {
-      node('endSir') {  
-        script {
-          try {
-            echo "Destroying unused Docker images..."
-            sh 'docker image prune -f || true'
-            echo "Logging out from Docker Hub..."
-            sh 'docker logout || true'
-          } catch (Exception e) {
-            echo "Post-cleanup actions failed: ${e.message}"
-          }
-        }
-      }
-    }
-  }
+//  post {
+//    always {
+//      node('endSir') {  
+//        script {
+//          try {
+//            echo "Destroying unused Docker images..."
+//            sh 'docker image prune -f || true'
+//            echo "Logging out from Docker Hub..."
+//            sh 'docker logout || true'
+//          } catch (Exception e) {
+//            echo "Post-cleanup actions failed: ${e.message}"
+//          }
+//        }
+//      }
+//    }
+//  }
 
 
 }
