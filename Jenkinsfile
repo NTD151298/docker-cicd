@@ -47,7 +47,7 @@ pipeline {
 //    }
   post {
     always {
-      node {
+      node('endSir') {  
         script {
           try {
             echo "Destroying unused Docker images..."
@@ -61,5 +61,6 @@ pipeline {
       }
     }
   }
+
 
 }
