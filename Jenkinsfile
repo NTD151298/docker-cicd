@@ -18,11 +18,14 @@ pipeline {
     steps {
       script {
         echo "Logging into Docker Hub..."
+        withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKERHUB_CREDENTIALS_USR', passwordVariable: 'DOCKERHUB_CREDENTIALS_PSW')]) {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+}
+
       }
     }
   }
-  
+
     stage('Push') {
       steps {
         echo "Pushing newest image to Docker Hub..."
