@@ -6,6 +6,7 @@ pipeline {
     DOCKER_IMAGE_NAME = "duongtn1512/random_game"
     NEW_DOCKER_IMAGE_NAME = "duongtn1512/random_game:${GIT_COMMIT_TAG}"
   }
+
   stages {
     stage('Build') {
       steps {      
@@ -13,12 +14,15 @@ pipeline {
         sh "docker build -t ${DOCKER_IMAGE_NAME}:${GIT_COMMIT_TAG} ."       
       }
     }
-    stage('Login') {
-      steps {        
-        echo "Login to Docker hub..."
+  stage('Login') {
+    steps {
+      script {
+        echo "Logging into Docker Hub..."
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
+  }
+  
     stage('Push') {
       steps {
         echo "Pushing newest image to Docker Hub..."
